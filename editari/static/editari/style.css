@@ -5,7 +5,18 @@
 }
 
 .first-container{
-    height: 60vh;
-    background-color: rebeccapurple;
+    background-image: url(/static/editari/background.jpg) ;
+    padding-top: 200px;
+    height: 80vh;
     text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+#title{
+    padding-bottom: 20px;
+    color: #250052;
+    font-family: monospace;
+    font-size: 40px;
+    font-weight: 800;
 }
