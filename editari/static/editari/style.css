@@ -1,0 +1,11 @@
+.first-container button a{
+    list-style: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+.first-container{
+    height: 60vh;
+    background-color: rebeccapurple;
+    text-align: center;
+}

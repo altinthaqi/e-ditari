@@ -3,13 +3,13 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-    return HttpResponse('<h1> Editari Home</h1>')
+    return render(request, 'editari/index.html')
 
 def staff_login(request):
-    return HttpResponse('<h1> Staff Login </h1>')
+    return render(request, 'editari/staff-login.html')
 
 def parent_login(request):
-    return HttpResponse('<h1> Parent Login </h1>')
+    return render(request, 'editari/parent-login.html')
 
 def student_login(request):
-    return HttpResponse('<h1> Student Login </h1>')
+    return render(request, 'editari/student-login.html')
