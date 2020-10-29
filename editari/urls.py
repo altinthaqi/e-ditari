@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -7,4 +9,5 @@ urlpatterns = [
     path('parent-register', views.parent_register, name='parent-register'),
     path('student-register', views.student_register, name='student-register'),
     path('home', views.blogs, name='blogs'),
+    path('login', views.login_user, name = 'login'),
 ]
