@@ -20,3 +20,21 @@
     font-size: 40px;
     font-weight: 800;
 }
+body {
+    width: 100%;
+    height: 100%;
+}
+.unique-color-dark {
+    background-color: #1c2331 !important;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
