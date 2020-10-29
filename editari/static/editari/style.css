@@ -6,18 +6,28 @@
 
 .first-container{
     background-image: url(/static/editari/background.jpg) ;
-    padding-top: 200px;
-    height: 80vh;
-    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+.first-container-flex{
+    width: 50%;
+    height: 150px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
     margin: auto;
+    flex-direction: row;
 }
 
 #title{
-    padding-bottom: 20px;
-    color: #250052;
+    position: absolute;
+    color: white;
     font-family: monospace;
-    font-size: 40px;
+    font-size: 60px;
     font-weight: 800;
 }
 body {

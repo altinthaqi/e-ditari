@@ -18,19 +18,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'editari/style.css' %}">
 
-    <style>
-        .bs-example{
-            margin: 20px;        
-        }
-    </style>
-
 </head>
 <body>
     <div class="first-container">
-        <h1 id="title">eDitari</h1>
-        <button type="button" class="btn btn-success"><a href="{% url 'staff-register' %}"> Regjistrohu si staf shkolle </a></button>
-        <button type="button" class="btn btn-primary"><a href="{% url 'parent-register' %}"> Regjistrohu si prind </a></button>
-        <button type="button" class="btn btn-danger"><a href="{% url 'student-register' %}"> Regjistrohu si student </a></button>
+         <h1 id="title">eDitari</h1>
+        <div class="first-container-flex">
+            <button type="button" class="btn btn-success"><a href="{% url 'staff-register' %}"> Regjistrohu si staf shkolle </a></button>
+            <button type="button" class="btn btn-primary"><a href="{% url 'parent-register' %}"> Regjistrohu si prind </a></button>
+            <button type="button" class="btn btn-danger"><a href="{% url 'student-register' %}"> Regjistrohu si student </a></button>
+        </div>
     </div>
 
     <!-- FOOTER AREA -->
