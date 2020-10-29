@@ -5,11 +5,11 @@ from django.http import HttpResponse
 def home(request):
     return render(request, 'editari/index.html')
 
-def staff_login(request):
-    return render(request, 'editari/staff-login.html')
+def staff_register(request):
+    return render(request, 'editari/staff-register.html')
 
-def parent_login(request):
-    return render(request, 'editari/parent-login.html')
+def parent_register(request):
+    return render(request, 'editari/parent-register.html')
 
-def student_login(request):
-    return render(request, 'editari/student-login.html')
+def student_register(request):
+    return render(request, 'editari/student-register.html')
