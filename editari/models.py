@@ -22,6 +22,7 @@ class Post(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
+    type = models.CharField(max_length=10)
 
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):

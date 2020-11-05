@@ -11,12 +11,22 @@ class NewsletterForm(forms.ModelForm):
         fields = ['email']
 
 class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Mandatory')
-    last_name = forms.CharField(max_length=30, required=False, help_text='Mandatory')
-    email = forms.EmailField(max_length=254, help_text='email')
-    birth_date = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
+    first_name = forms.CharField(max_length=30, required=True, help_text='*')
+    last_name = forms.CharField(max_length=30, required=True, help_text='*')
+    email = forms.EmailField(max_length=254, required=True, help_text='*')
+    birth_date = forms.DateField(help_text='*', widget=forms.TextInput(attrs={'placeholder':'YYYY-MM-DD'}))
 
     class Meta:
         model = User
         User._meta.get_field('email')._unique = True
-        fields = ('first_name', 'last_name', 'email', 'birth_date', 'username', 'password1', 'password2', )
+
+        help_texts = {
+            'username': '*',
+            'password1': "Strong password required"
+
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={'placheholder':'Username'}),
+            'pssword': forms.TextInput(attrs={'placheholder': 'Password'})
+        }
+        fields = ('first_name', 'last_name', 'email', 'birth_date', 'username', 'password1', 'password2',)

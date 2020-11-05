@@ -3,13 +3,13 @@
 {% load crispy_forms_tags %}
 
 <!--Login--> 
-<div class="container py-5">
+<div class="container py-5 form">
   <h1>Login</h1>
   <form method="POST">
     {% csrf_token %}
     {{ login_form|crispy }}
     <button class="btn btn-primary" type="submit">Login</button>
   </form>
-  <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
+  <!--<p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>-->
 </div>
 

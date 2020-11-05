@@ -37,6 +37,7 @@ def home(request):
     template = "editari/home.html"
     return render(request, template)
 
+
 def staff_register(request):
     return register(request, "staff")
 
@@ -54,13 +55,14 @@ def blogs(request):
     }
     return render(request, 'editari/blogs.html', context)
 
-def register(request):
+def register(request, u_type):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.profile.birth_date = form.cleaned_data.get('birth_date')
+            user.profile.type = u_type
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
@@ -70,26 +72,28 @@ def register(request):
         form = SignUpForm()
     return render(request, 'editari/register.html', {'form': form})
 
+
 def check_if_user_is_logedin(request):
     if request.user.is_authenticated:
         return redirect(home)
     else:
         return login_user(request)
 
+
 def login_user(request):
-	if request.method == "POST":
-		form = AuthenticationForm(request, data=request.POST)
-		if form.is_valid():
-			username = form.cleaned_data.get('username')
-			password = form.cleaned_data.get('password')
-			user = authenticate(username=username, password=password)
-			if user is not None:
-				login(request, user)
-				messages.info(request, f"You are now logged in as {username}.")
-				return redirect(home)
-			else:
-				messages.error(request,"Invalid username or password.")
-		else:
-			messages.error(request,"Invalid username or password.")
-	form = AuthenticationForm()
-	return render(request=request, template_name="editari/login.html", context={"login_form":form})
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"You are now logged in as {username}.")
+                return redirect(home)
+            else:
+                messages.error(request,"Invalid username or password.")
+        else:
+            messages.error(request,"Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request=request, template_name="editari/login.html", context={"login_form":form})
