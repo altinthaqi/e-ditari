@@ -1,15 +1,18 @@
-{% extends 'editari/base.html' %}
-
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'editari/style.css' %}">
+<div class = "form_page">
 {% block content %}
-  <h2>Sign up</h2>
+    <div class="form">
+    <h2>Sign up</h2>
+
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
       <p>
-        {{ field.label_tag }}<br>
+        {{ field.label_tag }}
         {{ field }}
         {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
+          <!-- <small style="color: grey">{{ field.help_text }}</small> -->
         {% endif %}
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
@@ -17,5 +20,7 @@
       </p>
     {% endfor %}
     <button type="submit">Sign up</button>
-  </form>
+    </form>
+    </div>
 {% endblock %}
+</div>
