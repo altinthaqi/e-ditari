@@ -67,7 +67,7 @@ def register(request, u_type):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect(home)
+            return redirect(login_user)
     else:
         form = SignUpForm()
     return render(request, 'editari/register.html', {'form': form})
@@ -92,8 +92,8 @@ def login_user(request):
                 messages.info(request, f"You are now logged in as {username}.")
                 return redirect(home)
             else:
-                messages.error(request,"Invalid username or password.")
+                messages.error(request,"Username ose passwordi eshte gabim!")
         else:
-            messages.error(request,"Invalid username or password.")
+            messages.error(request,"Username ose passwordi eshte gabim!")
     form = AuthenticationForm()
     return render(request=request, template_name="editari/login.html", context={"login_form":form})

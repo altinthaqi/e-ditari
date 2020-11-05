@@ -30,3 +30,6 @@ class SignUpForm(UserCreationForm):
             'pssword': forms.TextInput(attrs={'placheholder': 'Password'})
         }
         fields = ('first_name', 'last_name', 'email', 'birth_date', 'username', 'password1', 'password2',)
+
+
+    
