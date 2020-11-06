@@ -1,3 +1,11 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    margin: 0;
+    padding: 0;
+}
+*:focus {
+    outline: none;
+}
 .first-container button a{
     list-style: none;
     text-decoration: none;
@@ -12,7 +20,6 @@
     align-items: center;
     margin: auto;
 }
-
 #title{
     padding-bottom: 20px;
     color: #250052;
@@ -20,15 +27,9 @@
     font-size: 40px;
     font-weight: 800;
 }
-body {
-    width: 100%;
-    height: 100%;
-}
 .unique-color-dark {
     background-color: #1c2331 !important;
     color: white;
-    position: absolute;
-    bottom: 0;
     width: 100%;
 }
 a {
@@ -38,3 +39,91 @@ a {
 a:hover {
     text-decoration: none;
 }
+.illustration-index {
+    width: 100%;
+    height: 100%;
+}
+.right-side-div {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Titillium Web', sans-serif;
+    color: white;
+    font-weight: 100;
+}
+.paragraph {
+    display: flex;
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.paragraph > p {
+    border-left: 1px solid #ffcf2d;
+    padding-left: 25px;
+}
+.illustration-container {
+    background: rgb(28,35,49);
+}
+.ill2 {
+    border-left: 1px #ffcf2d;
+    border-left-style: dashed;
+}
+
+.form {
+    margin:0 auto;
+    text-align: center;
+    max-width: 700px;
+    padding: 2rem;
+    box-sizing: border-box;
+    background-color: rgb(27,36,49);
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    border-radius: 20px;
+
+
+}
+.form label, .form input {
+  width: 70%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  justify-content: space-between;
+  font-size: 1.1rem;
+
+}
+
+.form label {
+    display:inline-block;
+}
+.form input {
+    border: none;
+  border-radius: 15px;
+}
+.form_page{
+    background-image: url(/static/editari/background.jpg);
+    height: 100%;
+    position: relative;
+    padding: 40px 0px;
+
+}
+
+.form button{
+    width: 40%;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #6351ce;
+    color: #ffffff;
+    font-size: 20px;
+    border: 1px solid #ffffff;
+}
+.form p {
+    display: flex;
+    margin-bottom: 20px;
+
+}
+
+
