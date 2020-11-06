@@ -8,7 +8,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from editari.forms import SignUpForm
-from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.template import RequestContext
