@@ -90,7 +90,7 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect(home)
+                return redirect(blogs)
             else:
                 messages.error(request,"Username ose passwordi eshte gabim!")
         else:
