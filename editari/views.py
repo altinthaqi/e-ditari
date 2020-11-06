@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import NewsletterForm
+from .models import Post
 # Create your views here.
 
 def index(request):
@@ -29,3 +30,9 @@ def parent_register(request):
 
 def student_register(request):
     return render(request, 'editari/student-register.html')
+
+def blogs(request):
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'editari/blogs.html', context)
