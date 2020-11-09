@@ -1,9 +1,5 @@
+{% extends "editari/base.html" %}
 {% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
-{% endblock %}
+<h1>JENI BERE LOG OUT!</h1>
+<p> Shtypni <a href="{% url 'login' %}" style="color: blue;">KETU</a> per tu kyçur perseri.</p>  
+{% endblock content %}

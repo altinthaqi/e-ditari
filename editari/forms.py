@@ -32,4 +32,9 @@ class SignUpForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'email', 'birth_date', 'username', 'password1', 'password2',)
 
 
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
     
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email',]

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import NewsletterForm
+from .forms import NewsletterForm, UserUpdateForm
 from .models import Post
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -88,7 +88,6 @@ def login_user(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
                 return redirect(blogs)
             else:
                 messages.error(request,"Username ose passwordi eshte gabim!")
@@ -96,3 +95,19 @@ def login_user(request):
             messages.error(request,"Username ose passwordi eshte gabim!")
     form = AuthenticationForm()
     return render(request=request, template_name="editari/login.html", context={"login_form":form})
+
+@login_required
+def edit_profile(request):
+    u_form = UserUpdateForm()
+    if request.method == "POST":
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request, f'Llogaria juaj eshte bere UPDATE')
+            return redirect('edit-profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+
+    context = {'u_form' : u_form}
+    template = 'editari/edit_profile.html'
+    return render(request, template, context)
