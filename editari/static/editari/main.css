@@ -81,3 +81,21 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+
+  .back_to_top{
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    font-size: 30px;
+    display: none;
+}
+
+.back_to_top_wrapper{
+  position: absolute;
+  top: 100vh;
+  pointer-events: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
