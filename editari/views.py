@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import NewsletterForm, UserUpdateForm
+from .forms import NewsletterForm, UserUpdateForm, ProfileUpdateForm
 from .models import Post
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -99,15 +99,23 @@ def login_user(request):
 @login_required
 def edit_profile(request):
     u_form = UserUpdateForm()
+    p_form = ProfileUpdateForm()
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        if u_form.is_valid():
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
             u_form.save()
+            p_form.save()
             messages.success(request, f'Llogaria juaj eshte bere UPDATE')
             return redirect('edit-profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    context = {'u_form' : u_form}
+    context = {
+        'u_form' : u_form,
+        'p_form' : p_form
+        }
     template = 'editari/edit_profile.html'
     return render(request, template, context)
