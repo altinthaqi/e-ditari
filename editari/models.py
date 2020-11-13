@@ -44,6 +44,12 @@ class Profile(models.Model):
             img.save(self.image.path)
 
 
+#class School(models.Model):
+
+
+#class Shool_Class(models.model):
+
+
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
