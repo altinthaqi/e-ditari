@@ -26,6 +26,12 @@ class Profile(models.Model):
     type = models.CharField(max_length=10)
     list_display = (user, birth_date, type)
 
+#class School(models.Model):
+
+
+#class Shool_Class(models.model):
+
+
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:

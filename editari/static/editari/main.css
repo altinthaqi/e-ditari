@@ -82,7 +82,7 @@ body {
     font-size: 2.5rem;
   }
 
-  .back_to_top{
+.back_to_top{
     position: fixed;
     bottom: 20px;
     right: 50px;

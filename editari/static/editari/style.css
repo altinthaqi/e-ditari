@@ -125,5 +125,23 @@ a:hover {
     margin-bottom: 20px;
 }
 
+.back_to_top{
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    font-size: 30px;
+    display: none;
+}
+
+.back_to_top_wrapper{
+  position: absolute;
+  top: 100vh;
+  pointer-events: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 
 
