@@ -4,13 +4,18 @@ from django.contrib import messages
 from .forms import NewsletterForm, UserUpdateForm, ProfileUpdateForm
 from .models import Post
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.signals import user_logged_in, user_logged_out
 from editari.forms import SignUpForm
-from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.template import RequestContext
+from django.contrib.sessions.models import Session
+from django.utils import timezone
+from django.dispatch import receiver    
+
+
 # Create your views here.
 
 def index(request):
@@ -119,3 +124,13 @@ def edit_profile(request):
         }
     template = 'editari/edit_profile.html'
     return render(request, template, context)
+
+@receiver(user_logged_in)
+def got_online(sender, user, request, **kwargs):
+    user.profile.is_online = True
+    user.profile.save()
+
+@receiver(user_logged_out)
+def got_offline(sender, user, request, **kwargs):
+    user.profile.is_online = False
+    user.profile.save()

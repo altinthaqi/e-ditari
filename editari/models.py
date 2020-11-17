@@ -27,7 +27,8 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     birth_date = models.DateField(null=True, blank=True)
     type = models.CharField(max_length=10)
-    list_display = (user, birth_date, type)
+    is_online = models.BooleanField(default=False)
+    list_display = (user, birth_date, type, is_online)
 
     # Resize avatar image to 300x300
     def save(self, *args, **kwargs):

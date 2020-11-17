@@ -11,7 +11,11 @@
         <p class="text-secondary">Data e lindjes: <b>{{ user.profile.birth_date }}</b></p>        
         <p class="text-secondary">ID: <b>{{user.id}}</b></p>
         <p class="text-secondary">Roli: <b>{{ user.profile.type }}</b></p>
-
+        {% if user.profile.is_online %}
+        <p class="text-secondary">Statusi: <b>Online</b></p>
+        {% else %}
+        <p class="text-secondary">Statusi: <b>Offline</b></p>
+        {% endif %}
       </div>
     </div>
     <form method="POST" enctype="multipart/form-data">
