@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import NewsletterForm, UserUpdateForm, ProfileUpdateForm
-from .models import Post
+from .models import Post, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
@@ -101,6 +101,16 @@ def login_user(request):
     form = AuthenticationForm()
     return render(request=request, template_name="editari/login.html", context={"login_form":form})
 
+@login_required 
+def profile(request, pk):
+    profile = Profile.objects.get(id=pk)
+    template = 'editari/profile.html'
+    context = {
+        'profile' : profile,
+    }
+
+    return render(request, template, context)
+    
 @login_required
 def edit_profile(request):
     u_form = UserUpdateForm()

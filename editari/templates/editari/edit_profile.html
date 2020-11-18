@@ -18,6 +18,7 @@
         {% endif %}
       </div>
     </div>
+    {% if user.is_authenticated %}
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <fieldset class="form-group">
@@ -29,5 +30,8 @@
           <button class="btn btn-outline-info" type="submit">Ruaj ndryshimet</button>
       </div>
     </form>
+    {% else %}
+
+    {% endif %}
   </div>
 {% endblock content %}

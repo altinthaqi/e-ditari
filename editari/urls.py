@@ -11,5 +11,6 @@ urlpatterns = [
     path('home', views.blogs, name='blogs'),
     path('login', views.login_user, name = 'login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='editari/logout.html'), name='logout'),
+    path('profile/<str:pk>/', views.profile, name='profile'),
     path('edit-profile', views.edit_profile, name='edit-profile'),
 ]
