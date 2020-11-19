@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'editari.apps.EditariConfig',
     'django.contrib.admin',
     'django.contrib.auth',

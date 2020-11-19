@@ -16,6 +16,7 @@
 </head>
 <body>
   <nav class="navbar navbar-dark navbar-expand-sm">
+    <a class="nav-item nav-link" href="{% url 'post-create' %}"> New Post </a>
     <a class="navbar-brand" href="#">Logged in as {{ user.username }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
