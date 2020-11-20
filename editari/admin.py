@@ -8,5 +8,5 @@ admin.site.register(Newsletter)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'birth_date', 'type')
+    list_display = ('user', 'birth_date', 'type', 'is_online')
     ordering = ('birth_date',)

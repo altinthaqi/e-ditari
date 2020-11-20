@@ -16,25 +16,29 @@
 </head>
 <body>
   <nav class="navbar navbar-dark navbar-expand-sm">
-    <a class="nav-item nav-link" href="{% url 'post-create' %}"> New Post </a>
-    <a class="navbar-brand" href="#">Logged in as {{ user.username }}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbar-list-4">
-      <ul class="navbar-nav text-right">
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Dashboard</a>
-            <a class="dropdown-item" href="#">Edit Profile</a>
-            <a class="dropdown-item" href="#">Log Out</a>
-          </div>
-        </li>   
-      </ul>
-    </div>
+    {% if user.is_authenticated %}
+      <a class="nav-item nav-link" href="{% url 'post-create' %}"> New Post </a>
+      <a class="navbar-brand" href="#">Logged in as {{ user.first_name }} {{ user.last_name}}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-list-4">
+        <ul class="navbar-nav text-right">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="{{ user.profile.image.url }}" width="40" height="40" class="rounded-circle">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Dashboard</a>
+              <a class="dropdown-item" href="{% url 'edit-profile' %}">Edit Profile</a>
+              <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+            </div>
+          </li>   
+        </ul>
+      </div>
+    {% else %}
+    {% endif %}
+    
   </nav>
   <div class="sidenav">
     <a href="#about">About</a>
@@ -46,8 +50,14 @@
   <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div> 
+            {% endfor %}
+          {% endif %}
           {% block content %}
-          
           {% endblock %}
         </div>
         <div class="col-md-4">

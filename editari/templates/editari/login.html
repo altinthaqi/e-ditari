@@ -3,6 +3,11 @@
  <link rel="stylesheet" type="text/css" href="{% static 'editari/style.css' %}">
 <div class = "form_page">
   {% block content %}
+  {% if user.is_authenticated %}
+    <div class="form">
+    <h2> You're already logged in. Click <a href="{% url 'blogs' %}">here</a> to go to home.</h2>
+    </div>
+  {% else %}
     <div class="form">
       <h2>Login</h2>
         {% if messages %}
@@ -29,5 +34,6 @@
     <button type="submit">Log In</button>
     </form>
     </div>
+  {% endif %}
 {% endblock %}
 </div>
