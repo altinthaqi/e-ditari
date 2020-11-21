@@ -13,7 +13,7 @@ urlpatterns = [
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
-    path('home', PostListView.as_view(), name='blogs'),
+    path('home/', views.blogs, name='blogs'),
     path('login', views.login_user, name = 'login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='editari/logout.html'), name='logout'),
     path('profile/<str:pk>/', views.profile, name='profile'),

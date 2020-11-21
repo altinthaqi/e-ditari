@@ -12,10 +12,6 @@
             <p class="article-content">{{ post.content }}</p>
             <a href="#"><i class="fas fa-thumbtack"></i></a>
           </div>
-          <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-          <p class="article-content">{{ post.content }}</p>
-          <a href="#"><i class="fas fa-thumbtack"></i></a>
-        </div>
       </article>
     {% endfor %}
   {% else %}
