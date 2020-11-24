@@ -21,7 +21,7 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #34495e;
+  background-color: rgba(52, 73, 94, 1.0);
   overflow-x: hidden;
   padding-top: 70px;
 }
@@ -45,6 +45,9 @@ nav {
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
+  .sidenav {
+    padding-top: 15px;
+  }
   .sidenav a {font-size: 18px;}
+  
 }

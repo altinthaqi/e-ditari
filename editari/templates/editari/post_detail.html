@@ -3,7 +3,12 @@
     <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
-            <a class="mr-2" href="#">{{ object.author }}</a>
+            {% if post.author.profile.is_online %}
+              <div class="status-circle-online"></div>
+            {% else %}
+              <div class="status-circle-offline"></div>
+            {% endif %}
+            <a class="mr-2" href="{% url 'profile' pk=post.author.pk %}">{{ post.author }}</a>
             <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
             {% if object.author == user %}
               <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>

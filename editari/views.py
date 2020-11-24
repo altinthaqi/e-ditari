@@ -57,6 +57,7 @@ def student_register(request):
 
 def blogs(request):
     context = {
+        'online_students' : Profile.objects.filter(is_online=True, type='student'),
         'posts': Post.objects.all()
     }
     return render(request, 'editari/blogs.html', context)
@@ -151,7 +152,6 @@ def profile(request, pk):
     context = {
         'profile' : profile,
     }
-
     return render(request, template, context)
     
 @login_required
