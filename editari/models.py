@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 class User(AbstractUser):
+    #Create the user from Abstract User
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
     is_parent = models.BooleanField(default=False)
