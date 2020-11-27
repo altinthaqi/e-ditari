@@ -1,0 +1,22 @@
+{% extends "editari/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ profile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading"> {{ profile.user.get_full_name }} </h2>
+        <p class="text-secondary">Username: <b>{{ profile.user.username }} </b></p>
+        <p class="text-secondary">Email: <b>{{ profile.user.email }}</b></p>
+        <p class="text-secondary">Data e lindjes: <b>{{ profile.birth_date }}</b></p>        
+        <p class="text-secondary">ID: <b>{{profile.id}}</b></p>
+        <p class="text-secondary">Roli: <b>{{ profile.type }}</b></p>
+        {% if profile.is_online %}
+        <p class="text-secondary">Statusi: <b>Online</b></p>
+        {% else %}
+        <p class="text-secondary">Statusi: <b>Offline</b></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

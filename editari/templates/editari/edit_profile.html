@@ -1,0 +1,37 @@
+{% extends "editari/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading"> {{ request.user.get_full_name }} </h2>
+        <p class="text-secondary">Username: <b>{{ user.username }} </b></p>
+        <p class="text-secondary">Email: <b>{{ user.email }}</b></p>
+        <p class="text-secondary">Data e lindjes: <b>{{ user.profile.birth_date }}</b></p>        
+        <p class="text-secondary">ID: <b>{{user.id}}</b></p>
+        <p class="text-secondary">Roli: <b>{{ user.profile.type }}</b></p>
+        {% if user.profile.is_online %}
+        <p class="text-secondary">Statusi: <b>Online</b></p>
+        {% else %}
+        <p class="text-secondary">Statusi: <b>Offline</b></p>
+        {% endif %}
+      </div>
+    </div>
+    {% if user.is_authenticated %}
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Ndrysho te dhenat</legend>
+      </fieldset>
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+      <div class="form-group">
+          <button class="btn btn-outline-info" type="submit">Ruaj ndryshimet</button>
+      </div>
+    </form>
+    {% else %}
+
+    {% endif %}
+  </div>
+{% endblock content %}
