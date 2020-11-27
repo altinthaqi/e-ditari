@@ -1,3 +1,7 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.contrib.auth import login
+from django.db import transaction
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -45,15 +49,69 @@ def home(request):
 
 
 def staff_register(request):
-    return register(request, "staff")
-
-
-def parent_register(request):
-    return register(request, "parent")
+    User.is_teacher = True
+    User.is_student = False
+    User.is_parent = False
+    if request.method == 'POST':
+        form = TeacherSignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.is_teacher = True
+            user.teacher.birth_date = form.cleaned_data.get('birth_date')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            #login(request, user)
+            return redirect(login_user)
+    else:
+        form = TeacherSignUpForm()
+    return render(request, 'editari/register.html', {'form': form})
 
 
 def student_register(request):
-    return register(request, "student")
+    User.is_student = True
+    User.is_teacher = False
+    User.is_parent = False
+    if request.method == 'POST':
+        form = StudentSignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.is_student = True
+            print("Its at views")
+            user.student.birth_date = form.cleaned_data.get('birth_date')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            #login(request, user)
+            return redirect(login_user)
+    else:
+        form = StudentSignUpForm()
+    return render(request, 'editari/register.html', {'form': form})
+
+
+def parent_register(request):
+    User.is_parent = True
+    User.is_teacher = False
+    User.is_student = False
+    if request.method == 'POST':
+        form = ParentSignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.is_parent = True
+            user.parent.birth_date = form.cleaned_data.get('birth_date')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            #login(request, user)
+            return redirect(login_user)
+    else:
+        form = ParentSignUpForm()
+    return render(request, 'editari/register.html', {'form': form})
+
+
 
 def blogs(request):
     context = {
@@ -61,14 +119,15 @@ def blogs(request):
     }
     return render(request, 'editari/blogs.html', context)
 
-def register(request, u_type):
+'''
+def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
-            user.profile.birth_date = form.cleaned_data.get('birth_date')
-            user.profile.type = u_type
+            user.is_teacher = True
+            user.teacher.birth_date = form.cleaned_data.get('birth_date')
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
@@ -77,6 +136,7 @@ def register(request, u_type):
     else:
         form = SignUpForm()
     return render(request, 'editari/register.html', {'form': form})
+    '''
 
 
 def check_if_user_is_logedin(request):
