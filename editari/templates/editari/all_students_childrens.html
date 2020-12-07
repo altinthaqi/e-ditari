@@ -1,0 +1,31 @@
+{% extends "editari/base.html" %}
+
+{% block all_online_students %}
+    {% if user.is_authenticated %}
+        {% if user.profile.type == "staff" %}
+        <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Emri</th>
+                <th scope="col">Mbiemri</th>
+                <th scope="col">Username</th>
+                <th scope="col">Emri i prindit</th>
+
+              </tr>
+            </thead>
+            <tbody>
+                {% for student in online_students %}
+              <tr>
+                <th scope="row">{{student.user.id}}</th>
+                <td>{{student.user.first_name}}</td>
+                <td>{{student.user.last_name}}</td>
+                <td>{{student.user.username }}</td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+    
+    {% endif %}
+{% endblock all_online_students %}

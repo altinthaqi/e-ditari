@@ -50,13 +50,24 @@
     <a href="{% url 'blogs' %}"><i class="fa fa-home" aria-hidden="true" style="font-size: 25px; padding-right: 10px;"></i>Home</a>
     {% if user.profile.type == "student" %}
     <a href="#services"><i class="fas fa-bullhorn" style="font-size: 25px; padding-right: 10px;"></i>Orari im</a>
+    {% elif user.profile.type == "staff" %}
+    <div class="dropdown show">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Klasat
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#" style="color: black;">Klasa IV-6</a>
+        <a class="dropdown-item" href="#" style="color: black;">Klasa IV-4</a>
+        <a class="dropdown-item" href="#" style="color: black;">Klasa IV-2</a>
+      </div>
+    </div>
     {% else %}
-    <a href="#services"><i class="fas fa-bullhorn" style="font-size: 25px; padding-right: 10px;"></i>Services</a>
+    <a href="#services"><i class="fas fa-bullhorn" style="font-size: 25px; padding-right: 10px;"></i>Info</a>
     {% endif %}
     {% else %}
     <a href="{% url 'login' %}"><i class="fa fa-home" aria-hidden="true" style="font-size: 25px; padding-right: 10px;"></i>Login</a>
     <a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true" style="font-size: 25px; padding-right: 10px;"></i>Register</a>
-
 
     {% endif %}
 
@@ -64,6 +75,8 @@
   
   <main role="main" class="container">
       <div class="row">
+        {% block all_online_students %}
+        {% endblock all_online_students %}
         <div class="col-md-8">
           {% if messages %}
             {% for message in messages %}
@@ -76,25 +89,17 @@
           {% endblock %}
         </div>
         <div class="col-md-4">
-          <div class="content-section">
-            {% if user.profile.type == "staff" or user.profile.type == "parent" %}
-            <h3>Nxenesit online</h3>
-            <p class='text-muted'>Monitoroni aktivitetin e nxënësve tuaj!
-              <ul class="list-group">
-                {% for student in online_students %}
-                <li class="list-group-item list-group-item-light" style="justify-content: center;"><div class="status-circle-online"></div><a href="{% url 'profile' pk=student.user.pk %}"><b>{{ student.user.get_full_name }} </b></a></li>
-                {% endfor %}
-              </ul>
-            </p>
-            {% else %}
-            <h3>Detyrat e shtepise</h3>
-            <p class='text-muted'>Ketu shfaqen detyrat me te fundit te shtepise.
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light"> Detyra 01 </li>
-              </ul>
-            </p>
-            {% endif %}            
-          </div>
+            {% block side-menu %}
+            {% endblock side-menu %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+              <div class="alert alert-{{ message.tags }}">
+              </div> 
+        </div>
+        <div class="col-md-4">
+          
         </div>
       </div>
     </main>
