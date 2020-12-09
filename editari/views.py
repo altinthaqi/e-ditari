@@ -58,6 +58,7 @@ def staff_register(request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.is_teacher = True
+            user.student.birth_date = form.cleaned_data.get('birth_date')
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
