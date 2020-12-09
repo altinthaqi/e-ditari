@@ -69,7 +69,7 @@ a:hover {
     border-left-style: dashed;
 }
 
-.form {
+/* .form {
     margin:0 auto;
     text-align: center;
     max-width: 700px;
@@ -104,6 +104,8 @@ a:hover {
 }
 .form_page{
     background-image: url(/static/editari/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 100%;
     position: relative;
     padding: 40px 0px;
@@ -123,7 +125,7 @@ a:hover {
 .form p {
     display: flex;
     margin-bottom: 20px;
-}
+} */
 
 .back_to_top{
     position: fixed;
@@ -142,6 +144,79 @@ a:hover {
 html {
   scroll-behavior: smooth;
 }
-
-
-
+.flexing {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+}
+.left-side {
+    background-image: url('/static/editari/background2.jpg');
+    background-size: cover;
+    background-position-y: -150px;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-origin: border-box;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+.right-side {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #373B44;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+}
+.register-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.register-form > input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid white;
+    padding-top: 0;
+    background: transparent;
+    margin-top: 0;
+    color: white;
+    font-size: 20px;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 0.5; /* Firefox */
+  }
+.main-title {
+    font-size: 70px;
+    font-family: 'Titillium Web', sans-serif;
+    color: white;
+    padding-left: 10px;
+    border-width: 10px;
+    border-left: 1px solid white;
+    font-weight: 500;
+}
+.register-button {
+    margin-top: 50px;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    color: white;
+    font-size: 30px;
+    border-radius: 50px;
+    border: none;
+    transition: 0.2s ease-out;
+    font-family: 'Titillium Web', sans-serif;
+}
+.register-button:hover {
+    color: black;
+    background-color: white;
+}
+.logo {
+    width: 200px;
+    height: 200px;
+}

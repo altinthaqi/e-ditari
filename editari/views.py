@@ -12,7 +12,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.signals import user_logged_in, user_logged_out
-from editari.forms import SignUpForm
+from .forms import ParentSignUpForm, TeacherSignUpForm, StudentSignUpForm
 from django import forms
 from django.template import RequestContext
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -58,10 +58,10 @@ def staff_register(request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.is_teacher = True
-            user.teacher.birth_date = form.cleaned_data.get('birth_date')
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
+            form.save()
             #login(request, user)
             return redirect(login_user)
     else:

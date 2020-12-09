@@ -4,10 +4,8 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-<<<<<<< HEAD
 from django.utils.html import format_html
 from django.urls import reverse
-=======
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -17,7 +15,6 @@ class User(AbstractUser):
     is_student = models.BooleanField(default=False)
     is_parent = models.BooleanField(default=False)
 
->>>>>>> Altered Database
 
 from PIL import Image
 class Newsletter(models.Model):
@@ -129,8 +126,25 @@ class CTSS(models.Model):
         return self.temp
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    birth_date = models.DateField(null=True, blank=True)
+    type = models.CharField(max_length=10)
+    is_online = models.BooleanField(default=False)
+    list_display = (user, birth_date, type, is_online)
+
+    # Resize avatar image to 300x300
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
+        img = Image.open(self.image.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+
+
 @receiver(post_save, sender=User)
-<<<<<<< HEAD
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
@@ -139,7 +153,6 @@ def update_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, **kwargs):
     instance.profile.save()
-=======
 def update_profile_signal(instance, created, **kwargs):
     print("Its receiver")
     print("Student", User.is_student)
@@ -156,10 +169,10 @@ def update_profile_signal(instance, created, **kwargs):
             instance.student.save()
         except ObjectDoesNotExist:
             Student.objects.create(user=instance)
+            
     else:
         print("Its parent")
         try:
             instance.parent.save()
         except ObjectDoesNotExist:
             Parent.objects.create(user=instance)
->>>>>>> Altered Database
