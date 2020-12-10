@@ -1,14 +1,18 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'editari/style.css' %}">
 
-
+{% if user.is_authenticated %}
+  <div class="already">
+    <h1> Already logged in. <br> Click <a href="{% url 'blogs' %}"><span style="color: yellowgreen;">HERE</span></a> to go to home page. </h1>
+  </div>
+{% else %}
+{% block content %}
 <div class="flexing">
     <div class="left-side"> <!-- This is the left container-->
       <img src="/static/editari/logo.png" class="logo" style="padding-top: 40px;">
     </div>
     <div class="right-side"> <!-- This is the right container-->
       <h1 class="main-title"> Regjistrohu tani! </h1>
-      {% block content %}
       <form method="post" class="register-form">
         {% csrf_token %}
         {% for field in form %}
@@ -25,5 +29,6 @@
         <button type="submit" class="register-button">Regjistrohu</button>
         </form>
     </div>
-      {% endblock %}
     </div>
+{% endblock %}
+{% endif %}
