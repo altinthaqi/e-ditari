@@ -2,7 +2,7 @@
 
 {% block all_online_students %}
     {% if user.is_authenticated %}
-        {% if user.profile.type == "staff" %}
+        {% if user.profile.type == "Teacher" %}
         <table class="table table-dark">
             <thead>
               <tr>
@@ -15,14 +15,16 @@
               </tr>
             </thead>
             <tbody>
-                {% for student in online_students %}
+              {% for student in online_students %}
               <tr>
                 <th scope="row">{{student.user.id}}</th>
                 <td>{{student.user.first_name}}</td>
                 <td>{{student.user.last_name}}</td>
                 <td>{{student.user.username }}</td>
+                <td>{{student.user.username }}</td>
+
               </tr>
-                {% endfor %}
+              {% endfor %}
             </tbody>
           </table>
         {% endif %}

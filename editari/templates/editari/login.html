@@ -11,7 +11,7 @@
     <div class="left-side"> <!-- This is the left container-->
       <img src="/static/editari/logo.png" class="logo" style="padding-top: 40px;">
     </div>
-    <div class="right-side"> <!-- This is the right container-->
+    <div class="right-side" style="height: 100vh;"> <!-- This is the right container-->
       <h1 class="main-title"> Log In / Kyçu </h1>
       <form method="post" class="register-form">
         {% csrf_token %}
@@ -27,6 +27,7 @@
           {% endfor %}
       {% endfor %}
         <button type="submit" class="register-button">Log In</button>
+        <a href="{% url 'index' %}"><p> Nuk ke account? Regjistrohu tani duke klikuar ketu. </p></a>
         </form>
     </div>
   </div>

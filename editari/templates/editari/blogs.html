@@ -25,12 +25,12 @@
 {% endblock content %}
 {% block side-menu %}
 <div class="content-section">
-{% if user.profile.type == "staff" or user.profile.type == "parent" %}
-  {% if user.profile.type == "staff" %}
+{% if user.profile.type == "Teacher" or user.profile.type == "Parent" %}
+  {% if user.profile.type == "Teacher" %}
           <h3>Nxenesit online</h3>
           <p class='text-muted'>Monitoroni aktivitetin e nxënësve tuaj!
   {% endif %}
-  {% if user.profile.type == "parent" %}
+  {% if user.profile.type == "Parent" %}
           <h3>Femijet online.</h3>
           <p class='text-muted'>Monitoroni aktivitetin e femijeve tuaj!
   {% endif %}
@@ -40,7 +40,7 @@
               {% empty %}
               <li class="list-group-item list-group-item-light" style="justify-content: center;">Nuk ka asnje student online!</li>
               {% endfor %}
-              {% if user.profile.type == "staff" %}
+              {% if user.profile.type == "Teacher" %}
               <a href="{% url 'show-online' %}"><button type="button" class="btn btn-dark" style="width: 100%;">See all online users</button></a>
               {% endif %}
             </ul>

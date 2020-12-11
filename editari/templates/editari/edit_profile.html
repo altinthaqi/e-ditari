@@ -8,7 +8,6 @@
         <h2 class="account-heading"> {{ request.user.get_full_name }} </h2>
         <p class="text-secondary">Username: <b>{{ user.username }} </b></p>
         <p class="text-secondary">Email: <b>{{ user.email }}</b></p>
-        <p class="text-secondary">Data e lindjes: <b>{{ user.profile.birth_date }}</b></p>        
         <p class="text-secondary">ID: <b>{{user.id}}</b></p>
         <p class="text-secondary">Roli: <b>{{ user.profile.type }}</b></p>
         {% if user.profile.is_online %}

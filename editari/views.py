@@ -44,7 +44,7 @@ def index(request):
 def all_students_childrens(request):
     template = "editari/all_students_childrens.html"
     context = {
-        'online_students' : Profile.objects.filter(is_online=True, type='student'),
+        'online_students' : Profile.objects.filter(is_online=True, type='Student'),
     }
     return render(request, template, context)
 
@@ -64,7 +64,7 @@ def staff_register(request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.is_teacher = True
-            user.student.birth_date = form.cleaned_data.get('birth_date')
+            user.profile.type = 'Teacher'
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
@@ -87,10 +87,11 @@ def student_register(request):
             user.refresh_from_db()  # load the profile instance created by the signal
             user.is_student = True
             print("Its at views")
-            user.student.birth_date = form.cleaned_data.get('birth_date')
+            user.profile.type = 'Student'
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
+            form.save()
             #login(request, user)
             return redirect(login_user)
     else:
@@ -108,10 +109,11 @@ def parent_register(request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.is_parent = True
-            user.parent.birth_date = form.cleaned_data.get('birth_date')
+            user.profile.type = 'Parent'
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
+            form.save()
             #login(request, user)
             return redirect(login_user)
     else:
@@ -122,7 +124,7 @@ def parent_register(request):
 
 def blogs(request):
     context = {
-        'online_students' : Profile.objects.filter(is_online=True, type='student'),
+        'online_students' : Profile.objects.filter(is_online=True, type='Student'),
         'posts': Post.objects.all()
     }
     return render(request, 'editari/blogs.html', context)

@@ -49,9 +49,9 @@
   <div class="sidenav" id="side_nav">
     {% if user.is_authenticated %}
     <a href="{% url 'blogs' %}"><i class="fa fa-home" aria-hidden="true" style="font-size: 25px; padding-right: 10px;"></i>Home</a>
-    {% if user.profile.type == "student" %}
+    {% if user.profile.type == "Student" %}
     <a href="#services"><i class="fas fa-bullhorn" style="font-size: 25px; padding-right: 10px;"></i>Orari im</a>
-    {% elif user.profile.type == "staff" %}
+    {% elif user.profile.type == "Teacher" %}
     <div class="dropdown show">
       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Klasat

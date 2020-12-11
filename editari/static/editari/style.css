@@ -145,9 +145,8 @@ html {
   scroll-behavior: smooth;
 }
 .flexing {
-    width: 100%;
-    height: 100%;
     display: flex;
+    height: 100vh;
     
 }
 .left-side {
@@ -155,7 +154,6 @@ html {
     background-size: cover;
     background-position-y: -150px;
     background-repeat: no-repeat;
-    height: 100%;
     background-origin: border-box;
     width: 50%;
     display: flex;
@@ -163,7 +161,6 @@ html {
 }
 .right-side {
     width: 50%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -228,3 +225,15 @@ html {
     align-items: center;
     text-align: center;
 }
+
+  /* =============== M O B I L E =============== */
+  @media (min-width: 320px) and (max-width: 768px) {
+    .left-side {
+        display: none;
+    }
+    .right-side {
+        width: 100%;
+    }
+    
+  }
+  
