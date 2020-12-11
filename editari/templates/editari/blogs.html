@@ -5,10 +5,15 @@
       <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ post.author }}</a>
+                {% if post.author.profile.is_online %}
+                  <div class="status-circle-online"></div>
+                {% else %}
+                  <div class="status-circle-offline"></div>
+                {% endif %}
+              <a class="mr-2" href="{% url 'profile' pk=post.author.pk %}">{{ post.author }}</a>
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
-            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+            <h2><a class="article-title" href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>
             <a href="#"><i class="fas fa-thumbtack"></i></a>
           </div>
@@ -18,3 +23,35 @@
     <h1>YOU DO NOT HAVE ACCESS TO THIS PAGE. YOU MUST BE LOGGED IN. CLICK HERE TO <a href="{% url 'login' %}">LOGIN!</a></h1> 
   {% endif %}
 {% endblock content %}
+{% block side-menu %}
+<div class="content-section">
+{% if user.profile.type == "staff" or user.profile.type == "parent" %}
+  {% if user.profile.type == "staff" %}
+          <h3>Nxenesit online</h3>
+          <p class='text-muted'>Monitoroni aktivitetin e nxënësve tuaj!
+  {% endif %}
+  {% if user.profile.type == "parent" %}
+          <h3>Femijet online.</h3>
+          <p class='text-muted'>Monitoroni aktivitetin e femijeve tuaj!
+  {% endif %}
+            <ul class="list-group">
+              {% for student in online_students|slice:":3" %}
+              <li class="list-group-item list-group-item-light" style="justify-content: center;"><div class="status-circle-online"></div><a href="{% url 'profile' pk=student.user.pk %}"><b>{{ student.user.get_full_name }} </b></a></li>
+              {% empty %}
+              <li class="list-group-item list-group-item-light" style="justify-content: center;">Nuk ka asnje student online!</li>
+              {% endfor %}
+              {% if user.profile.type == "staff" %}
+              <a href="{% url 'show-online' %}"><button type="button" class="btn btn-dark" style="width: 100%;">See all online users</button></a>
+              {% endif %}
+            </ul>
+          </p>
+            {% else %}
+          <h3>Detyrat e shtepise</h3>
+          <p class='text-muted'>Ketu shfaqen detyrat me te fundit te shtepise.
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-light"> Detyra 01 </li>
+            </ul>
+          </p>
+  {% endif %}
+</div>            
+{% endblock side-menu %}

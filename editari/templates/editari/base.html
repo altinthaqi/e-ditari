@@ -17,8 +17,13 @@
 </head>
 <body id="top">
   <nav class="navbar navbar-dark navbar-expand-sm">
+    <div id="hamburgerbutton" onclick="hamburgerButton()">
+      <div class='line1'></div>
+      <div class='line2'></div>
+      <div class='line3'></div>
+    </div>
     {% if user.is_authenticated %}
-      <a class="nav-item nav-link" href="{% url 'post-create' %}"> New Post </a>
+      <a class="nav-item nav-link" href="{% url 'post-create' %}" style="color: white;"> New Post </a>
       <a class="navbar-brand" href="#">Logged in as {{ user.first_name }} {{ user.last_name}}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -41,15 +46,38 @@
     {% endif %}
     
   </nav>
-  <div class="sidenav">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#clients">Clients</a>
-    <a href="#contact">Contact</a>
+  <div class="sidenav" id="side_nav">
+    {% if user.is_authenticated %}
+    <a href="{% url 'blogs' %}"><i class="fa fa-home" aria-hidden="true" style="font-size: 25px; padding-right: 10px;"></i>Home</a>
+    {% if user.profile.type == "student" %}
+    <a href="#services"><i class="fas fa-bullhorn" style="font-size: 25px; padding-right: 10px;"></i>Orari im</a>
+    {% elif user.profile.type == "staff" %}
+    <div class="dropdown show">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Klasat
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#" style="color: black;">Klasa IV-6</a>
+        <a class="dropdown-item" href="#" style="color: black;">Klasa IV-4</a>
+        <a class="dropdown-item" href="#" style="color: black;">Klasa IV-2</a>
+      </div>
+    </div>
+    {% else %}
+    <a href="#services"><i class="fas fa-bullhorn" style="font-size: 25px; padding-right: 10px;"></i>Info</a>
+    {% endif %}
+    {% else %}
+    <a href="{% url 'login' %}"><i class="fa fa-home" aria-hidden="true" style="font-size: 25px; padding-right: 10px;"></i>Login</a>
+    <a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true" style="font-size: 25px; padding-right: 10px;"></i>Register</a>
+
+    {% endif %}
+
   </div>
   
   <main role="main" class="container">
       <div class="row">
+        {% block all_online_students %}
+        {% endblock all_online_students %}
         <div class="col-md-8">
           {% if messages %}
             {% for message in messages %}
@@ -62,17 +90,17 @@
           {% endblock %}
         </div>
         <div class="col-md-4">
-          <div class="content-section">
-            <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
-              </ul>
-            </p>
-          </div>
+            {% block side-menu %}
+            {% endblock side-menu %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+              <div class="alert alert-{{ message.tags }}">
+              </div> 
+        </div>
+        <div class="col-md-4">
+          
         </div>
       </div>
 
@@ -84,5 +112,6 @@
      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
      <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
      <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
+     <script src="{% static 'editari/js/script.js' %}" ></script>
 </body>
 </html>

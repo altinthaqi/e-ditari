@@ -18,4 +18,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='editari/logout.html'), name='logout'),
     path('profile/<str:pk>/', views.profile, name='profile'),
     path('edit-profile', views.edit_profile, name='edit-profile'),
+    path('show-online', views.all_students_childrens, name='show-online')
 ]

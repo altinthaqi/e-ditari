@@ -57,7 +57,9 @@ body {
   .article-metadata {
     padding-bottom: 1px;
     margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
+    border-bottom: 1px solid #e3e3e3;
+    display: flex;
+    align-items: center;
   }
   
   .article-metadata a:hover {
@@ -99,3 +101,70 @@ body {
 html {
   scroll-behavior: smooth;
 }
+  .status-circle-online {
+    width: 10px;
+    height: 10px;
+    background-color: forestgreen;
+    border-radius: 100%;
+    margin-right: 8px;
+}
+.status-circle-offline {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 100%;
+    margin-right: 8px;
+}
+
+  /* Css for hamburger button */
+  #hamburgerbutton {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    left: 30px;
+    transition: 0.1s ease-out;
+    z-index: 9999;
+  }
+  .line1, .line2, .line3 {
+    margin-top: 7px;
+    background-color: white;
+    width: 40px;
+    height: 5px;
+  }
+  
+  .sidenav {
+    z-index: 1;
+    width: 0px;
+    transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    background-color: rgba(52, 73, 94, 0,8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    }
+  .sidenav > a {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: 50;
+    font-size: 30px;
+  }
+  .navbar-expand-sm {
+    z-index: 7;
+  }
+  .list-group-item-light {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Media Query */
+
+  /* =============== M O B I L E =============== */
+  @media (min-width: 320px) and (max-width: 480px) {
+    .sidenav {
+      background-color: rgba(52, 73, 94, 0.8);
+    }
+    
+  }
+  

@@ -41,6 +41,12 @@ def index(request):
     }
     return render(request, template, context)
 
+def all_students_childrens(request):
+    template = "editari/all_students_childrens.html"
+    context = {
+        'online_students' : Profile.objects.filter(is_online=True, type='student'),
+    }
+    return render(request, template, context)
 
 #@login_required
 def home(request):
@@ -116,6 +122,7 @@ def parent_register(request):
 
 def blogs(request):
     context = {
+        'online_students' : Profile.objects.filter(is_online=True, type='student'),
         'posts': Post.objects.all()
     }
     return render(request, 'editari/blogs.html', context)
@@ -212,7 +219,6 @@ def profile(request, pk):
     context = {
         'profile' : profile,
     }
-
     return render(request, template, context)
     
 @login_required
